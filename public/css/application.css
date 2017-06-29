@@ -34,6 +34,7 @@ h1 {
   font-size: 5em;
   font-family: 'Patrick Hand SC';
   border-bottom: 1px double black;
+  margin-top: 15px;
 }
 
 ul {
@@ -51,5 +52,22 @@ li {
 
 .vote_count {
   display: inline-block;
+}
+
+.h2-page-title {
+    padding: 0px 25px;
+}
+
+.form-div {
+  padding: 50px;
+  width: 700px;
+  margin: auto;
+
+}
+
+.form {
+  max-width: 500px;
+  padding: 50px;
+  margin: auto;
 }
 
