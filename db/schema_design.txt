@@ -1,0 +1,6 @@
+SCHEMA DESIGN
+
+commentable_id & commentable_type are a polymorphic association on the questions and answers table
+votable_id & voteable_type are a polymorphic association on the questions, answers, and comments table
+
+Schema.xml, go to schemadesigner.devbootcamp.com, press load button, paste schema.xml contents into text box, and press load xml

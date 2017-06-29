@@ -4,7 +4,6 @@ class CreateAnswers < ActiveRecord::Migration
       t.integer :author_id, null:false
       t.integer :question_id, null:false
       t.string :body, null:false
-      t.bit :best, null:false
 
       t.timestamps
     end
