@@ -41,6 +41,7 @@ ul {
   list-style-type: none;
 }
 
+
 li {
   font-size: 125%;
   padding: 20px 0px;
@@ -53,11 +54,11 @@ li {
   margin: 5px;
 }
 
-.question_preview {
+.question-preview {
 
 }
 
-.vote_count {
+.vote-count {
   display: inline-block;
 }
 

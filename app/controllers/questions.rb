@@ -15,3 +15,8 @@ post '/questions' do
   # @author = User.find(1)
   redirect '/'
 end
+
+get '/questions/:id' do
+  @question = Question.find(params[:id])
+  erb :'questions/show'
+end
