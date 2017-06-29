@@ -8,8 +8,15 @@ class User < ActiveRecord::Base
   has_many :comments, foreign_key: :commenter_id
   has_many :votes, foreign_key: :voter_id
 
-  validates :email, uniqueness: true
-  validates :username, uniqueness: true
+  validates :email, presence: true, uniqueness: true
+  validates :username, presence: true, uniqueness: true
+  validates :password, presence: true
+
+  validate :matching_passwords
+
+  def matching_passwords
+
+  end
 
   def password
     @password ||= Password.new(password_hash)
