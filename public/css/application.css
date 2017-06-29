@@ -46,6 +46,13 @@ li {
   padding: 20px 0px;
 }
 
+
+.new_question_form > input,
+.new_question_form > textarea{
+  width: 400px;
+  margin: 5px;
+}
+
 .question_preview {
 
 }
@@ -56,6 +63,7 @@ li {
 
 .h2-page-title {
     padding: 0px 25px;
+    margin: 0 auto;
 }
 
 .form-div {
@@ -70,4 +78,5 @@ li {
   padding: 50px;
   margin: auto;
 }
+
 
