@@ -1,4 +1,8 @@
 body {
+  background-image: url('chi-pic.jpg')
+}
+
+main {
   /*padding:5px;*/
   margin: auto;
   max-width: 960px;
@@ -48,3 +52,4 @@ li {
 .vote_count {
   display: inline-block;
 }
+
