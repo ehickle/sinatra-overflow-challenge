@@ -1,0 +1,48 @@
+body {
+  padding:5px;
+  margin: auto;
+  max-width: 960px;
+  border: 1px solid green;
+  font-family: 'Inconsolata', serif;
+}
+
+nav {
+  margin: auto;
+  padding: 5px;
+  border: 1px solid black;
+}
+
+nav.header_nav{
+    text-align: right;
+    background: linear-gradient(135deg, #023A42, #DCF4F7);
+}
+
+a {
+  padding: 8px;
+  color: darkblue;
+}
+
+a:visited {
+  /*color: darkgreen;*/
+}
+
+h1 {
+  text-align: center;
+}
+
+ul {
+  list-style-type: none;
+  line-height: 200%
+}
+
+li {
+  font-size: 125%
+}
+
+.question_preview {
+
+}
+
+.vote_count {
+  display: inline-block;
+}
