@@ -12,5 +12,8 @@ post '/users' do
   else
     redirect '/sessions/new'
   end
+end
 
+get '/users/:id' do
+  "Hello World"
 end

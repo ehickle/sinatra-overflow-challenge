@@ -47,17 +47,17 @@ li {
 
 
 .new_question_form > input,
-.new_question_form > textarea{
+.new_question_form > textarea,
+.new_answer_form > textarea {
   width: 400px;
   margin: 5px;
-  margin-left: 20px;
 }
 
 .question-preview {
 
 }
 
-.vote-count {
+.inline {
   display: inline-block;
 }
 
@@ -73,10 +73,11 @@ li {
 
 }
 
-.form {
+form {
   max-width: 500px;
   padding: 50px;
-  margin: auto;
+  margin: 20px;
+  margin-right: 20px
 }
 
 .error {
@@ -87,7 +88,7 @@ li {
 }
 
 input[type=submit] {
-    margin: 20px;
+    margin: 20px 5px;
     border: 1px #000 solid;
     box-shadow: 5px 5px 10px #cbcbcb;
     padding: 10px;
@@ -95,8 +96,36 @@ input[type=submit] {
     background-color: #1c5f8e;
 }
 
-#new-question-img {
+.question-page {
+  margin: 20px;
+}
 
+#new-question-img {
+  float: right;
+  align: top;
+}
+
+.answer-bodies {
+  background: white;
+  width: 75%;
+}
+
+#delete-button {
+  margin: 5px;
+  padding: 5px;
+  vertical-align: top;
+}
+
+.fa {
+  font-size: 14px;
+}
+
+.answer-data > p {
+  float: right;
+  margin: 0 5px;
+}
+.vote-data {
+  vertical-align: top;
 }
 
 button {
@@ -111,7 +140,7 @@ button {
 .comment {
   margin: 10px;
   padding: 5px;
-  background-color: white;
+  background-color: rgba(150,202,219, .25);
 }
 
 .posted-on {

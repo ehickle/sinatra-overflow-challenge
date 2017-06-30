@@ -9,7 +9,7 @@
   <ul>
     <% @questions.each do |question| %>
       <li class='question-preview'>
-        <p class='vote-count'><%= question.votes.count %></p>
+        <p class='inline'><%= question.votes.count %></p>
       <a href="/questions/<%= question.id %>"><%= question.title %></a>--
       Author: <a href=''><%= question.author.username %></a>
       </li>
