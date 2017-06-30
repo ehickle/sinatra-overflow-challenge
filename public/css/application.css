@@ -80,4 +80,9 @@ li {
   margin: auto;
 }
 
-
+.error {
+  margin: 0px;
+  padding: 0px;
+  color: red;
+  margin-left: 25px;
+}
