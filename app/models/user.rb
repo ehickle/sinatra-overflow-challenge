@@ -12,19 +12,23 @@ class User < ActiveRecord::Base
   validates :username, presence: true, uniqueness: true
   validates :password, presence: true
 
-  validate :matching_passwords
-
-  def matching_passwords
-
-  end
+  validate :confirm_password_valid
 
   def password
     @password ||= Password.new(password_hash)
   end
 
   def password=(new_password)
+    @raw_password = new_password
     @password = Password.create(new_password)
     self.password_hash = @password
   end
 
+  def confirm_password=(confirm_password)
+    @confirm_password = confirm_password
+  end
+
+  def confirm_password_valid
+    errors.add(:password_confirmation, "did not match") unless @raw_password == @confirm_password
+  end
 end
