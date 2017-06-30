@@ -1,4 +1,35 @@
-<div>
+<div class="question-page">
   <h3><%= @question.title %></h3></br>
   <%= @question.body %>
+  <h4> Answers for this question: </h4>
+
+    <ul>
+      <% @question.answers.each do |answer| %>
+        <li>
+          <p class ='inline'> <%= answer.votes.count %> </p>
+          <div class = 'inline answer-bodies'>
+            <p> -<%= answer.body %> </p>
+          </div>
+            <% if current_user == answer.author %>
+              <form action ="/answers/<%= answer.id %>" method='post' id='delete-button' class='inline'>
+                <input type='hidden' name='_method' value='delete'>
+                <input type='submit' value ='delete'>
+              </form>
+            <% end %>
+        </li>
+      <% end %>
+    </ul>
+
+    <%= @error %>
+  <% if logged_in? && current_user == @question.author %>
+    <form>
+      <input type="submit" value="Delete Question">
+    </form>
+  <% elsif logged_in? && current_user != @question.author %>
+    <p>Answer question:</p>
+    <form action="/questions/<%= @question.id %>/answers" method="POST" class="new_answer_form">
+      <textarea name="body" rows=10></textarea><br>
+      <input type="submit" value="Submit Answer">
+    </form>
+  <% end %>
 </div>

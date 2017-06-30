@@ -12,7 +12,7 @@
 <body>
   <main>
     <nav class='header_nav'>
-      <a class = 'nav' href=''>Home</a>
+      <a class = 'nav' href='/'>Home</a>
       <% if logged_in? %>
         <a class = 'nav' href='/logout'>Log out</a>
         <a class = 'nav' href='/users/<%= @current_user.id %>'>User Profile</a>
