@@ -3,4 +3,8 @@ class Question < ActiveRecord::Base
   has_many :comments, as: :commentable
   has_many :votes, as: :votable
   has_many :answers
+
+  def time_since_creation
+    ((Time.now - created_at) / 3600).round
+  end
 end

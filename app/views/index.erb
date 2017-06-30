@@ -1,6 +1,6 @@
 <h1>DBC OVERFLOW!</h1>
 <h2 class="h2-page-title">Your go to location to ask the questions you've always wanted to know about the program.</h2>
-<% if 1==1 %>
+<% if logged_in? %>
   <form id='new-question-form' action='/questions/new' method='get'>
     <input type='submit' value = 'Ask a question!'/>
   </form>
@@ -9,22 +9,22 @@
   <p> hello!</p>
   <ul>
     <li class ='question-preview'>
-      <p class ='vote-count'>Num Votes</p>
+      <p class ='inline'>Num Votes</p>
       <a href=''>Question Title</a>--
       <a href=''>Poster</a>
     </li>
     <li class ='question-preview'>
-      <p  class ='vote-count'>Num Votes</p>
+      <p  class ='inline'>Num Votes</p>
       <a href=''>Question Title</a>--
       <a href=''>Poster</a>
     </li>
     <li class ='question-preview'>
-      <p  class ='vote-count'>Num Votes</p>
+      <p  class ='inline'>Num Votes</p>
       <a href=''>Question Title</a>--
       <a href=''>Poster</a>
     </li>
     <li class ='question-preview'>
-      <p  class ='vote-count'>Num Votes</p>
+      <p  class ='inline'>Num Votes</p>
       <a href=''>Question Title</a>--
       <a href=''>Poster</a>
     </li>
