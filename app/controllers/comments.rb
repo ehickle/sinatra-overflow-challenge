@@ -22,8 +22,9 @@ post '/questions/:question_id/comments' do
   end
 end
 
-delete 'comments/:comment_id' do
-  comment = Comment.find[:comment_id]
+# make a delete route instead for RESTfulness
+get '/comments/:comment_id/delete' do
+  comment = Comment.find(params[:comment_id])
   comment.destroy!
   redirect "/questions/#{comment.commentable.id}"
 end
