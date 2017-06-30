@@ -27,12 +27,6 @@ nav.header_nav{
     float: right;
 }
 
-a {
-  padding: 8px;
-  color: darkblue;
-}
-
-
 h1 {
   text-align: center;
   font-size: 5em;
@@ -104,3 +98,42 @@ input[type=submit] {
 #new-question-img {
 
 }
+
+button {
+  display: block;
+}
+
+.comment-div {
+  margin-left: 25px;
+  margin-right :25px;
+}
+
+.comment {
+  margin: 10px;
+  padding: 5px;
+  background-color: white;
+}
+
+.posted-on {
+  margin-left: 10px;
+}
+
+a {
+  color: darkblue;
+}
+
+  a.header {
+    padding: 8px;
+  }
+
+  a.delete {
+    color: red;
+    text-align: right;
+    float: right;
+    padding-bottom: 15px;
+  }
+
+  a.nav {
+    padding: 8px;
+  }
+

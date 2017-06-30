@@ -10,7 +10,7 @@ end
 
 post '/questions' do
   # redirect '/' unless current_user
-  @author = User.create(username: 'tim', email: 'tim@tom.com', password_hash: 'timtom')
+  @author = current_user
 
   @author.questions.create(params[:question])
   # @question = Question.create(params[:question])

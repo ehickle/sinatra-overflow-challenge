@@ -8,9 +8,9 @@ post '/users' do
 
   if !@user.save
     @errors = @user.errors.full_messages
-    p erb :'/users/new'
+    erb :'/users/new'
   else
-    p redirect '/sessions/new'
+    redirect '/sessions/new'
   end
 
 end
