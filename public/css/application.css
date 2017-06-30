@@ -85,6 +85,13 @@ li {
   margin: auto;
 }
 
+.error {
+  margin: 0px;
+  padding: 0px;
+  color: red;
+  margin-left: 25px;
+}
+
 input[type=submit] {
     margin: 20px;
     border: 1px #000 solid;
