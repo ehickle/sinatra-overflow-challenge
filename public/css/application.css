@@ -23,6 +23,10 @@ nav.header_nav{
     background: linear-gradient(135deg, #023A42, #DCF4F7);
 }
 
+#new-question-button {
+    float: right;
+}
+
 a {
   padding: 8px;
   color: darkblue;
@@ -52,6 +56,7 @@ li {
 .new_question_form > textarea{
   width: 400px;
   margin: 5px;
+  margin-left: 20px;
 }
 
 .question-preview {
@@ -85,4 +90,17 @@ li {
   padding: 0px;
   color: red;
   margin-left: 25px;
+}
+
+input[type=submit] {
+    margin: 20px;
+    border: 1px #000 solid;
+    box-shadow: 5px 5px 10px #cbcbcb;
+    padding: 10px;
+    color: #fff;
+    background-color: #1c5f8e;
+}
+
+#new-question-img {
+
 }
