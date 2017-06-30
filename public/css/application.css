@@ -11,7 +11,7 @@ main {
   background-color: #EEEFF0
 }
 
-nav {
+div .questions {
   box-sizing: border-box;
   width: 100%;
   margin: 0px;
@@ -21,13 +21,14 @@ nav {
 nav.header_nav{
     text-align: right;
     background: linear-gradient(135deg, #023A42, #DCF4F7);
+    padding: 8px;
 }
 
 #new-question-button {
     float: right;
 }
 
-h1 {
+.headtitle{
   text-align: center;
   font-size: 5em;
   font-family: 'Patrick Hand SC';
@@ -38,7 +39,6 @@ h1 {
 ul {
   list-style-type: none;
 }
-
 
 li {
   font-size: 125%;
@@ -166,3 +166,16 @@ a {
     padding: 8px;
   }
 
+table {
+  display: block;
+  margin: 0 auto;
+  width: 30%;
+}
+
+table th {
+  border-bottom: 2px black solid;
+}
+
+table td {
+  padding: 0px 25px;
+}

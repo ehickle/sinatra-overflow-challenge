@@ -1,18 +1,25 @@
-<h1>DBC OVERFLOW!</h1>
+<h1 class="headtitle">DBC OVERFLOW!</h1>
 <h2 class="h2-page-title">Your go to location to ask the questions you've always wanted to know about the program.</h2>
-<% if 1==1 %>
+
+<% if logged_in? %>
   <form id='new-question-form' action='/questions/new' method='get'>
     <input id='new-question-button' type='submit' value = 'Ask a question!'/>
   </form>
 <% end %>
-<nav>
-  <ul>
+
+<div class="questions">
+  <table>
+    <tr>
+      <th>Votes</th>
+      <th>Question</th>
+      <th>Author</th>
+    </tr>
     <% @questions.each do |question| %>
-      <li class='question-preview'>
-        <p class='inline'><%= question.votes.count %></p>
-      <a href="/questions/<%= question.id %>"><%= question.title %></a>--
-      Author: <a href=''><%= question.author.username %></a>
-      </li>
+      <tr>
+        <td class='question-preview'><%= question.votes.count %></td>
+        <td><a href="/questions/<%= question.id %>"><%= question.title %></a></td>
+        <td><a href=''><%= question.author.username %></a></td>
+      </tr>
     <% end %>
-  </ul>
-</nav>
+  </table>
+</div>
