@@ -38,8 +38,15 @@
       <% @question.answers.each do |answer| %>
         <li>
           <div class='vote-data inline'>
-            <p class ='inline'><i class="fa fa-thumbs-o-up"></i> <%= answer.votes.count %> <i class="fa fa-thumbs-o-down"></i>
-            </p>
+              <form class="inline vote-buttons" action="/answers/<%=answer.id%>/votes" method="post">
+                <input type="hidden" name="vote" value="1">
+                <button name="upvote" class='thumbs'><i class="fa fa-thumbs-o-up"></i></button>
+              </form>
+                <%= answer.vote_value %>
+              <form class="inline vote-buttons" action="/answers/<%=answer.id%>/votes" method="post">
+                <input type="hidden" name="vote" value="-1">
+                <button name="downvote" class='thumbs'><i class="fa fa-thumbs-o-down"></i></button>
+              </form>
           </div>
           <div class = 'inline answer-bodies'>
             <p> -<%= answer.body %> </p>

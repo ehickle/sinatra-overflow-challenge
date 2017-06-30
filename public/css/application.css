@@ -151,18 +151,26 @@ a {
   color: darkblue;
 }
 
-  a.header {
+a.header {
     padding: 8px;
-  }
+}
 
-  a.delete {
+a.delete {
     color: red;
     text-align: right;
     float: right;
     padding-bottom: 15px;
-  }
+}
 
-  a.nav {
+a.nav {
     padding: 8px;
-  }
+}
 
+.vote-buttons {
+  margin: 0;
+  padding: 0;
+}
+.thumbs {
+  background: none;
+  border: none;
+}
