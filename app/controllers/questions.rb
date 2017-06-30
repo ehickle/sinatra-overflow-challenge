@@ -11,6 +11,7 @@ end
 post '/questions' do
   # redirect '/' unless current_user
   @author = current_user
+
   @author.questions.create(params[:question])
   # @question = Question.create(params[:question])
   # @author = User.find(1)
