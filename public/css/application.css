@@ -119,8 +119,17 @@ input[type=submit] {
 #delete-button {
   margin: 5px;
   padding: 5px;
+  vertical-align: top;
 }
 
+.fa {
+  font-size: 14px;
+}
 
-
-
+.answer-data > p {
+  float: right;
+  margin: 0 5px;
+}
+.vote-data {
+  vertical-align: top;
+}

@@ -6,9 +6,14 @@
     <ul>
       <% @question.answers.each do |answer| %>
         <li>
-          <p class ='inline'> <%= answer.votes.count %> </p>
+          <div class='vote-data inline'>
+            <p class ='inline'><i class="fa fa-thumbs-o-up"></i> <%= answer.votes.count %> <i class="fa fa-thumbs-o-down"></i>
+            </p>
+          </div>
           <div class = 'inline answer-bodies'>
             <p> -<%= answer.body %> </p>
+            <small class='answer-data'><p> <%= answer.time_since_creation %> hours ago</p>
+            <p> <%= answer.author.username %> |</p></small>
           </div>
             <% if current_user == answer.author %>
               <form action ="/answers/<%= answer.id %>" method='post' id='delete-button' class='inline'>
