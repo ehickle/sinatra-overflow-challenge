@@ -41,21 +41,30 @@ ul {
   list-style-type: none;
 }
 
+
 li {
   font-size: 125%;
   padding: 20px 0px;
 }
 
-.question_preview {
+
+.new_question_form > input,
+.new_question_form > textarea{
+  width: 400px;
+  margin: 5px;
+}
+
+.question-preview {
 
 }
 
-.vote_count {
+.vote-count {
   display: inline-block;
 }
 
 .h2-page-title {
     padding: 0px 25px;
+    margin: 0 auto;
 }
 
 .form-div {

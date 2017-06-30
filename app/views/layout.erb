@@ -12,11 +12,16 @@
 <body>
   <main>
     <nav class='header_nav'>
-      <a class='nav' href='/sessions/new'>Log in</a>
-      <a class='nav' href='/users/new'>Register</a>
-      <a class='nav' href=''>User Profile</a>
-      <!-- <a class = 'nav' href=''>Log out</a> -->
+      <a class = 'nav' href=''>Home</a>
+      <% if logged_in? %>
+        <a class = 'nav' href='/logout'>Log out</a>
+        <a class = 'nav' href='/users/<%= @current_user.id %>'>User Profile</a>
+      <% else %>
+        <a class='nav' href='/sessions/new'>Log in</a>
+        <a class='nav' href='/users/new'>Register</a>
+      <% end %>
     </nav>
+
   <%= erb :'/_errors' %>
   <%= yield %>
   </main>
