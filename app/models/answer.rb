@@ -9,4 +9,12 @@ class Answer < ActiveRecord::Base
   def time_since_creation
     ((Time.now - created_at) / 3600).round
   end
+
+  def vote_value
+    total = 0
+    self.votes.each do |vote|
+      total += vote.value
+    end
+    total
+  end
 end
