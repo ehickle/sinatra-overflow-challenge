@@ -1,0 +1,32 @@
+<div class="user-page">
+
+  <!-- username & score -->
+  <h2>@<%= @user.username %></h2>
+  <% @user.score = 0 if @user.score == nil %>
+  <h3>Score: <%= @user.score %></h3>
+  <hr>
+
+  <!-- questions -->
+  <% if @user.questions.any? %>
+    <h3>Questions asked:</h3>
+    <% @user.questions.each do |question| %>
+      <div class = 'question-bodies'>
+        <p> <a href="/questions/<%= question.id %>"><%= question.title %></a>
+        <br><small class='answer-data'><%= question.time_since_creation %> hours ago</small></p>
+      </div>
+    <% end %>
+  <% end %>
+
+  <!-- answers -->
+  <% if @user.answers.any? %>
+    <h3>Questions answered:</h3>
+    <% @user.answers.each do |answer| %>
+      <div class = 'question-bodies'>
+        <p> <a href="/questions/<%= answer.question.id %>"><%= answer.question.title %></a>
+        <br><small class='answer-data'> asked by <a href="/users/<%= answer.question.author.id %>"><%= answer.question.author.username %></a> | answered <%= answer.time_since_creation %> hours ago
+        </small>
+      </div>
+    <% end %>
+  <% end %>
+
+</div>
