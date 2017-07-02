@@ -11,7 +11,7 @@
       <li class='question-preview'>
         <p class='inline'><%= question.vote_value %></p>
       <a href="/questions/<%= question.id %>"><%= question.title %></a>--
-      Author: <a href=''><%= question.author.username %></a>
+      Author: <a href='/users/<%= question.author.id %>'><%= question.author.username %></a>
       </li>
     <% end %>
   </ul>

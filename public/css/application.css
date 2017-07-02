@@ -5,6 +5,8 @@ body {
 main {
   /*padding:5px;*/
   margin: auto;
+  margin-bottom: 40px;
+  margin-top: 40px;
   max-width: 960px;
   border: 1px solid green;
   font-family: 'Inconsolata', serif;
@@ -33,6 +35,11 @@ h1 {
   font-family: 'Patrick Hand SC';
   border-bottom: 1px double black;
   margin-top: 15px;
+}
+
+h2 {
+  font-size: 2em;
+
 }
 
 ul {
@@ -96,7 +103,7 @@ input[type=submit] {
     background-color: #1c5f8e;
 }
 
-.question-page {
+.question-page, .user-page {
   margin: 20px;
 }
 
@@ -170,7 +177,17 @@ a.nav {
   margin: 0;
   padding: 0;
 }
+
 .thumbs {
   background: none;
   border: none;
+}
+
+.comment-container {
+  margin-left: 40px;
+}
+
+.comment-form {
+  padding: 0px;
+  margin: 0px;
 }
