@@ -1,5 +1,34 @@
 <div class="question-page">
-  <h2><%= @question.title %></h2></br>
+  <h2 class="inline"><%= @question.title %></h2>
+
+  <div class='vote-data inline'>
+    <% if logged_in? %>
+      <form class="inline vote-buttons" action="/questions/<%= @question.id %>/votes" method="post">
+        <input type="hidden" name="vote" value="1">
+        <button name="upvote" class='thumbs'><i class="fa fa-thumbs-o-up"></i></button>
+      </form>
+    <% end %>
+    <% if @question.vote_value > 0 %>
+      <h3 class="inline positive-vote">
+        <%= @question.vote_value %>
+      </h3>
+    <% elsif @question.vote_value < 0 %>
+      <h3 class="inline negative-vote">
+        <%= @question.vote_value %>
+      </h3>
+    <% else %>
+      <h3 class="inline">
+        <%= @question.vote_value %>
+      </h3>
+    <% end %>
+    <% if logged_in? %>
+      <form class="inline vote-buttons" action="/questions/<%= @question.id %>/votes" method="post">
+        <input type="hidden" name="vote" value="-1">
+        <button name="downvote" class='thumbs'><i class="fa fa-thumbs-o-down"></i></button>
+      </form>
+    <% end %>
+  </div>
+
   <h3><%= @question.body %></h3>
 
   <% if @question.comments.any? %>
@@ -38,18 +67,35 @@
       <% @question.answers.each do |answer| %>
         <li>
           <div class='vote-data inline'>
+            <% if logged_in? %>
               <form class="inline vote-buttons" action="/answers/<%=answer.id%>/votes" method="post">
                 <input type="hidden" name="vote" value="1">
                 <button name="upvote" class='thumbs'><i class="fa fa-thumbs-o-up"></i></button>
               </form>
+            <% end %>
+            <% if answer.vote_value > 0 %>
+              <h3 class="inline positive-vote">
                 <%= answer.vote_value %>
+              </h3>
+            <% elsif answer.vote_value < 0 %>
+              <h3 class="inline negative-vote">
+                <%= answer.vote_value %>
+              </h3>
+            <% else %>
+              <h3 class="inline">
+                <%= answer.vote_value %>
+              </h3>
+            <% end %>
+            <% if logged_in? %>
               <form class="inline vote-buttons" action="/answers/<%=answer.id%>/votes" method="post">
                 <input type="hidden" name="vote" value="-1">
                 <button name="downvote" class='thumbs'><i class="fa fa-thumbs-o-down"></i></button>
               </form>
+            <% end %>
           </div>
+
           <div class = 'inline answer-bodies'>
-            <p> -<%= answer.body %> </p>
+            <p class="answer-body"><%= answer.body %> </p>
             <small class='answer-data'><p> <%= answer.time_since_creation %> hours ago</p>
             <p> <%= answer.author.username %> |</p></small>
           </div>

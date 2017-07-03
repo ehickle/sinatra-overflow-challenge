@@ -158,6 +158,10 @@ form {
   margin: 0 5px;
 }
 
+.answer-body {
+  padding: 20px;
+}
+
 
 /* Comments */
 
@@ -189,6 +193,17 @@ a.delete {
 
 .vote-data {
   vertical-align: top;
+  margin: 22px 0;
+}
+
+.positive-vote {
+  color: #5CB85C;
+  margin: 0;
+}
+
+.negative-vote {
+  color: #D9534F;
+  margin: 0;
 }
 
 
