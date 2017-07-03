@@ -6,6 +6,8 @@ body {
 
 main {
   margin: auto;
+  margin-bottom: 40px;
+  margin-top: 40px;
   max-width: 960px;
   border: 1px solid green;
   background-color: #EEEFF0
@@ -35,8 +37,13 @@ h1 {
   margin-top: 15px;
 }
 
-main {
+h2 {
   font-family: 'Inconsolata', serif;
+  font-size: 2em;
+}
+
+ul {
+  list-style-type: none;
 }
 
 .h2-page-title {
@@ -141,7 +148,7 @@ form {
   align: top;
 }
 
-.question-page {
+.question-page, .user-page {
   margin: 20px;
 }
 
@@ -214,4 +221,18 @@ a.delete {
   padding: 0px;
   color: red;
   margin-left: 25px;
+}
+
+.thumbs {
+  background: none;
+  border: none;
+}
+
+.comment-container {
+  margin-left: 40px;
+}
+
+.comment-form {
+  padding: 0px;
+  margin: 0px;
 }
