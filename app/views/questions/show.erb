@@ -175,14 +175,16 @@
           </form>
         <% end %>
       <% end %>
-  
+
       <!-- END display comments for each answer -->
 
     <% end %>
   </ul>
 
+  <!-- If logged in user is question author, they can delete the question -->
   <% if logged_in? && current_user == @question.author %>
-    <form>
+    <form action="/questions/<%= @question.id %>/" method="POST">
+      <input type="hidden" name="_method" value="DELETE">
       <input type="submit" value="Delete Question">
     </form>
   <% elsif logged_in? && current_user != @question.author %>
