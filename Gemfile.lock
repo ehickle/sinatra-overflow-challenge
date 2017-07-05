@@ -43,7 +43,7 @@ GEM
     multi_json (1.12.1)
     nokogiri (1.8.0)
       mini_portile2 (~> 2.2.0)
-    pg (0.21.0)
+    pg (0.20.0)
     pry (0.10.4)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -104,7 +104,7 @@ DEPENDENCIES
   capybara
   factory_girl
   faker
-  pg
+  pg (= 0.20)
   pry-byebug
   rack-test
   rake
@@ -115,4 +115,4 @@ DEPENDENCIES
   sinatra-contrib
 
 BUNDLED WITH
-   1.14.6
+   1.15.1
