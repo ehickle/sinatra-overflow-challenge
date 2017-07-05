@@ -100,10 +100,14 @@ input[type=submit] {
   background-color: #1c5f8e;
 }
 
-#delete-button {
+#delete-button, #best-answer-button {
   margin: 5px;
   padding: 5px;
   vertical-align: top;
+}
+
+ #best-answer-input {
+  background-color: #3CB371;
 }
 
 button {
@@ -151,6 +155,10 @@ form {
 
 .question-page, .user-page {
   margin: 20px;
+}
+
+p.inline {
+  margin: 0;
 }
 
 
@@ -243,4 +251,14 @@ a.delete {
 .comment-form {
   padding: 0px;
   margin: 0px;
+}
+
+  /* Score */
+
+.score {
+  text-align: center;
+  font-size: 2em;
+  margin: 0;
+  padding: 0;
+
 }
