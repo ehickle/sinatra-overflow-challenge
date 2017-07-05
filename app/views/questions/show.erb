@@ -125,35 +125,35 @@
       <!-- START display comments for each answer -->
 
       <% if answer.comments.any? %>
-  <div class="comment-div">
-    <% answer.comments.reverse.each do |comment| %>
-      <p class="comment">
+        <div class="comment-div">
+          <% answer.comments.reverse.each do |comment| %>
+            <p class="comment">
 
-      <% if current_user == comment.commenter %>
-        <a href="/comments/<%= comment.id %>/delete" class="delete">delete</a>
+            <% if current_user == comment.commenter %>
+              <a href="/comments/<%= comment.id %>/delete" class="delete">delete</a>
+            <% end %>
+
+              <%= comment.body %><br>
+              <!-- TODO: fix datetime display -->
+
+              <small class="posted-on">
+                <%= comment.time_since_creation %> hours ago by <a href="/users/<%=comment.commenter.id %>"><%=comment.commenter.username%></a>
+              </small>
+
+            </p>
+          <% end %>
+        </div>
       <% end %>
 
-        <%= comment.body %><br>
-        <!-- TODO: fix datetime display -->
-
-        <small class="posted-on">
-          <%= comment.time_since_creation %> hours ago by <a href="/users/<%=comment.commenter.id %>"><%=comment.commenter.username%></a>
-        </small>
-
-      </p>
-    <% end %>
-  </div>
-  <% end %>
-
-  <% if logged_in? %>
-    <a href="/questions/<%= @question.id %>/answers/<%= answer.id %>/comments/new">Comment</a>
-    <% if @new_comment_on_answer == answer.id %>
-      <form method="POST" action="/questions/<%= @question.id %>/answers/<%= @answer.id %>/comments">
-        <input type="text" name="body" placeholder="Comment here...">
-        <input type="submit" value="Save">
-      </form>
-    <% end %>
-  <% end %>
+      <% if logged_in? %>
+        <a href="/questions/<%= @question.id %>/answers/<%= answer.id %>/comments/new">Comment</a>
+        <% if @new_comment_on_answer == answer.id %>
+          <form method="POST" action="/questions/<%= @question.id %>/answers/<%= @answer.id %>/comments">
+            <input type="text" name="body" placeholder="Comment here...">
+            <input type="submit" value="Save">
+          </form>
+        <% end %>
+      <% end %>
   
       <!-- END display comments for each answer -->
 
