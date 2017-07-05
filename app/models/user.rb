@@ -31,4 +31,9 @@ class User < ActiveRecord::Base
   def confirm_password_valid
     errors.add(:password_confirmation, "did not match") unless @raw_password == @confirm_password
   end
+
+  def total_score
+    best_answers = self.answers.select { |answer| answer.question.best_answer_id == answer.id }
+    best_answers.length
+  end
 end

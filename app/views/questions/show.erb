@@ -120,6 +120,27 @@
             </form>
           <% end %>
 
+          <!-- START best answer button -->
+          <% if current_user == @question.author %>
+            <form action ="/questions/<%= @question.id %>/answers/<%= answer.id %>/best" method='post' id='best-answer-button' class='inline'>
+              <input type='hidden' name='_method' value='put'>
+
+              <% if @question.best_answer_id == answer.id %>
+                <input id='best-answer-input' type='submit' value ='best answer ✓'>
+              <% else %>
+                <input type='submit' value ='best answer'>
+              <% end %>
+
+            </form>
+
+          <% else %>
+            <% if @question.best_answer_id == answer.id %>
+                <input class='inline' id='best-answer-input' type='submit' value ='best answer ✓'>
+              <% end %>
+
+          <% end %>
+          <!-- END best answer button -->
+
       </li>
 
       <!-- START display comments for each answer -->

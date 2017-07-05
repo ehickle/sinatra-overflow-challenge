@@ -15,4 +15,9 @@ class Question < ActiveRecord::Base
     end
     total
   end
+
+  def best_answer_author_id
+    answer = Answer.find(self.best_answer_id)
+    answer.author.id
+  end
 end
