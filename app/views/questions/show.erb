@@ -48,7 +48,7 @@
         <form class="inline vote-buttons" action="/questions/<%= @question.id %>/votes/<%= @question.find_vote(current_user.id).id %>/edit" method="post">
           <input type="hidden" name="_method" value="put">
           <input type="hidden" name="vote_value" value="-1">
-          <button name="upvote" class='thumbs'><i class="fa fa-thumbs-o-up"></i></button>
+          <button name="downvote" class='thumbs'><i class="fa fa-thumbs-o-down"></i></button>
         </form>
       <% else %>
 <!-- If user has not yet voted -->
