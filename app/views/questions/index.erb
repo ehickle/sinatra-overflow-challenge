@@ -11,11 +11,11 @@
 
       <li class='question-preview'>
         <% if question.vote_value > 0 %>
-          <p class="inline positive-vote">
+          <p class="inline positive-vote-count">
             <%= question.vote_value %>
           </p>
         <% elsif question.vote_value < 0 %>
-          <p class="inline negative-vote">
+          <p class="inline negative-vote-count">
             <%= question.vote_value %>
           </p>
         <% else %>
@@ -23,7 +23,7 @@
             <%= question.vote_value %>
           </p>
         <% end %>
-        
+
       <a href="/questions/<%= question.id %>"><%= question.title %></a>--
       Author: <a href='/users/<%= question.author.id %>'><%= question.author.username %></a>
       </li>
