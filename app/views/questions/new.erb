@@ -1,9 +1,10 @@
 <h2 class='h2-page-title'>Complete the form below to ask a new question</h2>
 
-<form class='new_question_form' action='/questions' method='post'>
-  <input type='text' name='question[title]' placeholder ="Please Summarize your question in a title"/></br>
-  <textarea name='question[body]' placeholder ="Enter your full question here" rows=21></textarea></br>
-  <input type ='submit' value = 'Post your question!'>
-</form>
-
-<img id="new-question-img" src="/images/dbc-logo.jpg">
+<div class="container">
+  <form class='new_question_form' action='/questions' method='post'>
+    <input type='text' name='question[title]' placeholder ="Please Summarize your question in a title"/></br>
+    <textarea name='question[body]' placeholder ="Enter your full question here" rows=21></textarea></br>
+    <input type ='submit' value = 'Post your question!'>
+  </form>
+  <img id="new-question-img" src="/images/dbc-logo.jpg">
+</div>

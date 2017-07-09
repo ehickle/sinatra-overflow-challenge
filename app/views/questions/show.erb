@@ -9,7 +9,7 @@
 <!-- If user has already voted an upvote, disables upvote button -->
         <button name="upvote" class='inline thumbs'><i class="fa fa-thumbs-up upvote"></i></button>
       <% elsif @question.voted?(current_user.id) && @question.downvote?(current_user.id) %>
-<!-- If user already voted an downvote, update vote to upvote -->
+<!-- If user already voted a downvote, update vote to upvote -->
         <form class="inline vote-buttons" action="/questions/<%= @question.id %>/votes/<%= @question.find_vote(current_user.id).id %>/edit" method="post">
           <input type="hidden" name="_method" value="put">
           <input type="hidden" name="vote_value" value="1">
@@ -64,36 +64,36 @@
 
   <!-- START display comments for each question -->
 
-  
+  <% if @question.comments.any? %>
   <div class="comment-div">
-    <div class="comments-only">
-      <% @question.comments.order(:created_at).each do |comment| %>
-        <p class="comment">
+    <% @question.comments.reverse.each do |comment| %>
+      <p class="comment">
 
-        <% if current_user == comment.commenter %>
-          <a href="/comments/<%= comment.id %>/delete" class="delete">delete</a>
-        <% end %>
-
-          <%= comment.body %><br>
-          <!-- TODO: fix datetime display -->
-
-          <small class="posted-on">
-            <%= comment.time_since_creation %> hours ago by <a href="/users/<%=comment.commenter.id %>"><%=comment.commenter.username%></a>
-          </small>
-        </p>
+      <% if current_user == comment.commenter %>
+        <a href="/comments/<%= comment.id %>/delete" class="delete">delete</a>
       <% end %>
-      </div>
-    <% if logged_in? %>
-      <a class="open-comment-form" href="/questions/<%= @question.id %>/comments/new">Comment</a>
-      <% if @new_comment_on_question %>
 
-        <%= erb :'questions/_comment_form', layout: false %>
+        <%= comment.body %><br>
+        <!-- TODO: fix datetime display -->
 
-      <% end %>
+        <small class="posted-on">
+          <%= comment.time_since_creation %> hours ago by <a href="/users/<%=comment.commenter.id %>"><%=comment.commenter.username%></a>
+        </small>
+
+      </p>
     <% end %>
   </div>
+  <% end %>
 
-
+  <% if logged_in? %>
+    <a href="/questions/<%= @question.id %>/comments/new">Comment</a>
+    <% if @new_comment_on_question %>
+      <form method="POST" action="/questions/<%= @question.id %>/comments">
+        <input type="text" name="body" placeholder="Comment here...">
+        <input type="submit" value="Save">
+      </form>
+    <% end %>
+  <% end %>
 
   <!-- END display comments for each question -->
 
@@ -111,7 +111,7 @@
   <!-- If user has already voted an upvote, disables upvote button -->
               <button name="upvote" class='inline thumbs'><i class="fa fa-thumbs-up upvote"></i></button>
             <% elsif answer.voted?(current_user.id) && answer.downvote?(current_user.id) %>
-  <!-- If user already voted an downvote, update vote to upvote -->
+  <!-- If user already voted a downvote, update vote to upvote -->
               <form class="inline vote-buttons" action="/answers/<%=answer.id%>/votes/<%= answer.find_vote(current_user.id).id %>/edit" method="post">
                 <input type="hidden" name="_method" value="put">
                 <input type="hidden" name="vote_value" value="1">
@@ -200,14 +200,14 @@
 
       <!-- START display comments for each answer -->
 
+      <% if answer.comments.any? %>
         <div class="comment-div">
-          <div class="comments-only">
-            <% answer.comments.reverse.each do |comment| %>
-              <p class="comment">
+          <% answer.comments.reverse.each do |comment| %>
+            <p class="comment">
 
-              <% if current_user == comment.commenter %>
-                <a href="/comments/<%= comment.id %>/delete" class="delete">delete</a>
-              <% end %>
+            <% if current_user == comment.commenter %>
+              <a href="/comments/<%= comment.id %>/delete" class="delete">delete</a>
+            <% end %>
 
               <%= comment.body %><br>
               <!-- TODO: fix datetime display -->
@@ -216,19 +216,20 @@
                 <%= comment.time_since_creation %> hours ago by <a href="/users/<%=comment.commenter.id %>"><%=comment.commenter.username%></a>
               </small>
 
-              </p>
-            <% end %>
-          </div>
-          <% if logged_in? %>
-            <a class="open-comment-form" href="/questions/<%= @question.id %>/answers/<%= answer.id %>/comments/new">Comment</a>
-            <% if @new_comment_on_answer == answer.id %>
-              <form method="POST" action="/questions/<%= @question.id %>/answers/<%= @answer.id %>/comments">
-                <input type="text" name="body" placeholder="Comment here...">
-                <input type="submit" value="Save">
-              </form>
-            <% end %>
+            </p>
           <% end %>
         </div>
+      <% end %>
+
+      <% if logged_in? %>
+        <a href="/questions/<%= @question.id %>/answers/<%= answer.id %>/comments/new">Comment</a>
+        <% if @new_comment_on_answer == answer.id %>
+          <form method="POST" action="/questions/<%= @question.id %>/answers/<%= @answer.id %>/comments">
+            <input type="text" name="body" placeholder="Comment here...">
+            <input type="submit" value="Save">
+          </form>
+        <% end %>
+      <% end %>
 
       <!-- END display comments for each answer -->
 

@@ -1,11 +1,13 @@
 <h1>DBC OVERFLOW!</h1>
 <h2 class="h2-page-title">Your go to location to ask the questions you've always wanted to know about the program.</h2>
+
+<section>
 <% if logged_in? %>
-  <form id='new-question-form' action='/questions/new' method='get'>
-    <input id='new-question-button' type='submit' value = 'Ask a question!'/>
+  <form id='new-question-button' action='/questions/new' method='get'>
+    <input type='submit' value = 'Ask a question!'/>
   </form>
 <% end %>
-<nav>
+
   <ul>
     <% @questions.each do |question| %>
 
@@ -29,4 +31,4 @@
       </li>
     <% end %>
   </ul>
-</nav>
+</section>
