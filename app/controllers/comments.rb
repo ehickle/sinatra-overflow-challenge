@@ -16,15 +16,15 @@ end
 post '/questions/:question_id/comments' do
     comment             = Comment.new(body:params[:body])
     @question           = Question.find(params[:question_id])
-    comment.commentable = Question.find(params[:question_id])
+    comment.commentable = @question
     comment.commenter   = current_user
   if request.xhr?
     if comment.save
       content_type :json
-        { 
-          id: comment.id, 
-          body: comment.body, 
-          time_since_creation: comment.time_since_creation, 
+        {
+          id: comment.id,
+          body: comment.body,
+          time_since_creation: comment.time_since_creation,
           commenter: comment.commenter.username,
           commenter_id: comment.commenter.id
         }.to_json
@@ -43,7 +43,7 @@ post '/questions/:question_id/comments' do
   end
 end
 
-# general comment delete route (for questions and answers) 
+# general comment delete route (for questions and answers)
 # TODO: make a DELETE form button instead, for RESTfulness
 get '/comments/:comment_id/delete' do
   comment = Comment.find(params[:comment_id])
@@ -85,15 +85,31 @@ post '/questions/:question_id/answers/:answer_id/comments' do
   comment   = Comment.new(body:params[:body])
   @question = Question.find(params[:question_id])
   @answer   = Answer.find(params[:answer_id])
-  
-  comment.commentable = @answer
+
+  comment.commentable = Answer.find(params[:answer_id])
   comment.commenter   = current_user
 
-  if comment.save
-    erb :"/questions/show"
+  if request.xhr?
+    if comment.save
+      content_type :json
+        {
+          id: comment.id,
+          body: comment.body,
+          time_since_creation: comment.time_since_creation,
+          commenter: comment.commenter.username,
+          commenter_id: comment.commenter.id
+        }.to_json
+    else
+      status 422
+    end
   else
-    @errors = ["Comment cannot be blank"]
-    erb :"/questions/show"
+
+    if comment.save
+      erb :"/questions/show"
+    else
+      @errors = ["Comment cannot be blank"]
+      erb :"/questions/show"
+    end
   end
 end
 
