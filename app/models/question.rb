@@ -11,7 +11,11 @@ class Question < ActiveRecord::Base
   end
 
   def best_answer_author_id
-    answer = Answer.find(self.best_answer_id)
-    answer.author.id
+    if self.best_answer_id != nil
+      answer = Answer.find(self.best_answer_id)
+      answer.author.id
+    else
+      return 0
+    end
   end
 end
