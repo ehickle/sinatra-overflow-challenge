@@ -1,5 +1,5 @@
 get '/questions' do
-  @questions = Question.all
+  @questions = Question.order(:id).all
 
   erb :'/questions/index'
 end
@@ -21,4 +21,9 @@ end
 get '/questions/:id' do
   @question = Question.find(params[:id])
   erb :'questions/show'
+end
+
+delete '/questions/:id/' do
+  Question.find(params[:id]).destroy!
+  redirect '/'
 end

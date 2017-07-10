@@ -1,0 +1,12 @@
+<% if @answer %>
+  <form id="comment-form" method="POST" action="/questions/<%= @question.id %>/answers/<%= @answer.id %>/comments">
+    <input type="text" name="body" placeholder="Comment here...">
+    <input id="submit-comment-form-question"type="submit" value="Save">
+  </form>
+
+<% else %>
+  <form id="comment-form" method="POST" action="/questions/<%= @question.id %>/comments">
+    <input type="text" name="body" placeholder="Comment here...">
+    <input id="submit-comment-form-question"type="submit" value="Save">
+  </form>
+<% end %>

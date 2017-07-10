@@ -1,0 +1,43 @@
+<div class="user-page">
+
+  <!-- username & score -->
+  <h2>@<%= @user.username %></h2>
+
+  <% if @user.total_score == nil %>
+    <% score = 0 %>
+  <% else %>
+    <% score = @user.total_score %>
+  <% end %>
+
+  <h3 class="score">Score: <%= score %></h3>
+  <hr>
+
+  <!-- questions -->
+  <% if @user.questions.any? %>
+    <h3>Questions asked:</h3>
+    <% @user.questions.each do |question| %>
+      <div class = 'question-bodies'>
+        <p> <a href="/questions/<%= question.id %>"><%= question.title %></a>
+        <br><small class='answer-data'><%= question.time_since_creation %> hours ago</small></p>
+      </div>
+    <% end %>
+  <% end %>
+
+  <!-- answers -->
+  <% if @user.answers.any? %>
+    <h3>Questions answered:</h3>
+    <% @user.answers.each do |answer| %>
+      <div class = 'question-bodies'>
+        <p> <a href="/questions/<%= answer.question.id %>"><%= answer.question.title %></a>
+
+        <% if answer.question.best_answer_author_id == @user.id %>
+          (Best answer ✓)
+        <% end %>
+
+        <br><small class='answer-data'> asked by <a href="/users/<%= answer.question.author.id %>"><%= answer.question.author.username %></a> | answered <%= answer.time_since_creation %> hours ago
+        </small>
+      </div>
+    <% end %>
+  <% end %>
+
+</div>

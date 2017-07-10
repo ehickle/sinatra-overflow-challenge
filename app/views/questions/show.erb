@@ -1,70 +1,244 @@
 <div class="question-page">
-  <h2><%= @question.title %></h2></br>
+  <h2 class="inline"><%= @question.title %></h2>
+
+  <div class='vote-data inline'>
+
+    <% if logged_in? %>
+<!-- If user is logged in, checks if they have voted on question. If so, checks the value of vote -->
+      <% if @question.voted?(current_user.id) && @question.upvote?(current_user.id) %>
+<!-- If user has already voted an upvote, disables upvote button -->
+        <button name="upvote" class='inline thumbs'><i class="fa fa-thumbs-up upvote"></i></button>
+      <% elsif @question.voted?(current_user.id) && @question.downvote?(current_user.id) %>
+<!-- If user already voted an downvote, update vote to upvote -->
+        <form class="inline vote-buttons" action="/questions/<%= @question.id %>/votes/<%= @question.find_vote(current_user.id).id %>/edit" method="post">
+          <input type="hidden" name="_method" value="put">
+          <input type="hidden" name="vote_value" value="1">
+          <button name="upvote" class='thumbs'><i class="fa fa-thumbs-o-up"></i></button>
+        </form>
+      <% else %>
+<!-- If user has not yet voted -->
+        <form class="inline vote-buttons" action="/questions/<%= @question.id %>/votes" method="post">
+          <input type="hidden" name="vote" value="1">
+          <button name="upvote" class='thumbs'><i class="fa fa-thumbs-o-up"></i></button>
+        </form>
+      <% end %>
+    <% end %>
+
+    <% if @question.vote_value > 0 %>
+      <h3 class="inline vote-count positive-vote-count">
+        <%= @question.vote_value %>
+      </h3>
+    <% elsif @question.vote_value < 0 %>
+      <h3 class="inline vote-count negative-vote-count">
+        <%= @question.vote_value %>
+      </h3>
+    <% else %>
+      <h3 class="inline vote-count">
+        <%= @question.vote_value %>
+      </h3>
+    <% end %>
+
+    <% if logged_in? %>
+<!-- If user is logged in, checks if they have voted on question. If so, checks the value of vote -->
+      <% if @question.voted?(current_user.id) && @question.downvote?(current_user.id) %>
+<!-- If user has already voted a downvote, disables downvote button -->
+        <button name="downvote" class='inline thumbs'><i class="fa fa-thumbs-down downvote"></i></button>
+      <% elsif @question.voted?(current_user.id) && @question.upvote?(current_user.id) %>
+<!-- If user already voted an upvote, update vote to downvote -->
+        <form class="inline vote-buttons" action="/questions/<%= @question.id %>/votes/<%= @question.find_vote(current_user.id).id %>/edit" method="post">
+          <input type="hidden" name="_method" value="put">
+          <input type="hidden" name="vote_value" value="-1">
+          <button name="downvote" class='thumbs'><i class="fa fa-thumbs-o-down"></i></button>
+        </form>
+      <% else %>
+<!-- If user has not yet voted -->
+        <form class="inline vote-buttons" action="/questions/<%= @question.id %>/votes" method="post">
+          <input type="hidden" name="vote" value="-1">
+          <button name="downvote" class='thumbs'><i class="fa fa-thumbs-o-down"></i></button>
+        </form>
+      <% end %>
+    <% end %>
+  </div>
+
   <h3><%= @question.body %></h3>
 
-  <% if @question.comments.any? %>
+  <!-- START display comments for each question -->
+
+  
   <div class="comment-div">
-    <% @question.comments.reverse.each do |comment| %>
-      <p class="comment">
+    <div class="comments-only">
+      <% @question.comments.order(:created_at).each do |comment| %>
+        <p class="comment">
 
-      <% if current_user == comment.commenter %>
-        <a href="/comments/<%= comment.id %>/delete" class="delete">delete</a>
+        <% if current_user == comment.commenter %>
+          <a href="/comments/<%= comment.id %>/delete" class="delete">delete</a>
+        <% end %>
+
+          <%= comment.body %><br>
+          <!-- TODO: fix datetime display -->
+
+          <small class="posted-on">
+            <%= comment.time_since_creation %> hours ago by <a href="/users/<%=comment.commenter.id %>"><%=comment.commenter.username%></a>
+          </small>
+        </p>
       <% end %>
+      </div>
+    <% if logged_in? %>
+      <a class="open-comment-form" href="/questions/<%= @question.id %>/comments/new">Comment</a>
+      <% if @new_comment_on_question %>
 
-        <%= comment.body %><br>
-        <!-- fix datetime display -->
+        <%= erb :'questions/_comment_form', layout: false %>
 
-        <small class="posted-on">Posted
-          <%= comment.time_since_creation %> by <a href="/users/<%=comment.commenter.id %>"><%=comment.commenter.username%></a>
-        </small>
-
-      </p>
       <% end %>
-  </div>
-  <% end %>
-
-  <% if logged_in? %>
-    <a href="/questions/<%= @question.id %>/comments/new">Comment</a>
-    <% if @new_comment %>
-      <form method="POST" action="/questions/<%= @question.id %>/comments">
-        <input type="text" name="body" placeholder="Comment here...">
-        <input type="submit" value="Save">
-      </form>
     <% end %>
+  </div>
+
+
+
+  <!-- END display comments for each question -->
+
+  <% if @question.answers.any? %>
+    <h4>Answers</h4>
   <% end %>
 
-   <h4>Answers</h4>
-    <ul>
-      <% @question.answers.each do |answer| %>
-        <li>
-          <div class='vote-data inline'>
+  <ul>
+    <% @question.answers.each do |answer| %>
+      <li>
+        <div class='vote-data inline'>
+          <% if logged_in? %>
+  <!-- If user is logged in, checks if they have voted on question. If so, checks the value of vote -->
+            <% if answer.voted?(current_user.id) && answer.upvote?(current_user.id) %>
+  <!-- If user has already voted an upvote, disables upvote button -->
+              <button name="upvote" class='inline thumbs'><i class="fa fa-thumbs-up upvote"></i></button>
+            <% elsif answer.voted?(current_user.id) && answer.downvote?(current_user.id) %>
+  <!-- If user already voted an downvote, update vote to upvote -->
+              <form class="inline vote-buttons" action="/answers/<%=answer.id%>/votes/<%= answer.find_vote(current_user.id).id %>/edit" method="post">
+                <input type="hidden" name="_method" value="put">
+                <input type="hidden" name="vote_value" value="1">
+                <button name="upvote" class='thumbs'><i class="fa fa-thumbs-o-up"></i></button>
+              </form>
+            <% else %>
+<!-- If user has not yet voted -->
               <form class="inline vote-buttons" action="/answers/<%=answer.id%>/votes" method="post">
                 <input type="hidden" name="vote" value="1">
                 <button name="upvote" class='thumbs'><i class="fa fa-thumbs-o-up"></i></button>
               </form>
-                <%= answer.vote_value %>
-              <form class="inline vote-buttons" action="/answers/<%=answer.id%>/votes" method="post">
-                <input type="hidden" name="vote" value="-1">
-                <button name="downvote" class='thumbs'><i class="fa fa-thumbs-o-down"></i></button>
-              </form>
+            <% end %>
+        <% end %>
+
+        <% if answer.vote_value > 0 %>
+          <h3 class="inline vote-count positive-vote-count">
+            <%= answer.vote_value %>
+          </h3>
+        <% elsif answer.vote_value < 0 %>
+          <h3 class="inline vote-count negative-vote-count">
+            <%= answer.vote_value.to_s %>
+          </h3>
+        <% else %>
+          <h3 class="inline vote-count">
+            <%= answer.vote_value %>
+          </h3>
+        <% end %>
+
+        <% if logged_in? %>
+<!-- If user is logged in, checks if they have voted on question. If so, checks the value of vote -->
+          <% if answer.voted?(current_user.id) && answer.downvote?(current_user.id) %>
+<!-- If user has already voted a downvote, disables downvote button -->
+            <button name="downvote" class='inline thumbs'><i class="fa fa-thumbs-down downvote"></i></button>
+          <% elsif answer.voted?(current_user.id) && answer.upvote?(current_user.id) %>
+<!-- If user already voted an upvote, update vote to downvote -->
+            <form class="inline vote-buttons" action="/answers/<%=answer.id%>/votes/<%= answer.find_vote(current_user.id).id %>/edit" method="post">
+              <input type="hidden" name="_method" value="put">
+              <input type="hidden" name="vote_value" value="-1">
+              <button name="upvote" class='thumbs'><i class="fa fa-thumbs-o-up"></i></button>
+            </form>
+          <% else %>
+<!-- If user has not yet voted -->
+            <form class="inline vote-buttons" action="/answers/<%=answer.id%>/votes" method="post">
+              <input type="hidden" name="vote" value="-1">
+              <button name="downvote" class='thumbs'><i class="fa fa-thumbs-o-down"></i></button>
+            </form>
+          <% end %>
+        <% end %>
+        </div>
+
+        <div class = 'inline answer-bodies'>
+          <p><%= answer.body %> </p>
+          <small class='answer-data'><p> <%= answer.time_since_creation %> hours ago</p>
+          <p> <a href="/users/<%= answer.author.id %>"><%= answer.author.username %></a> |</p></small>
+        </div>
+
+          <% if current_user == answer.author %>
+            <form action ="/answers/<%= answer.id %>" method='post' id='delete-button' class='inline'>
+              <input type='hidden' name='_method' value='delete'>
+              <input type='submit' value ='delete'>
+            </form>
+          <% end %>
+
+          <!-- START best answer button -->
+          <% if current_user == @question.author %>
+            <form action ="/questions/<%= @question.id %>/answers/<%= answer.id %>/best" method='post' id='best-answer-button' class='inline'>
+              <input type='hidden' name='_method' value='put'>
+
+              <% if @question.best_answer_id == answer.id %>
+                <input id='best-answer-input' type='submit' value ='best answer ✓'>
+              <% else %>
+                <input type='submit' value ='best answer'>
+              <% end %>
+
+            </form>
+
+          <% else %>
+            <% if @question.best_answer_id == answer.id %>
+                <input class='inline' id='best-answer-input' type='submit' value ='best answer ✓'>
+              <% end %>
+
+          <% end %>
+          <!-- END best answer button -->
+
+      </li>
+
+      <!-- START display comments for each answer -->
+
+        <div class="comment-div">
+          <div class="comments-only">
+            <% answer.comments.reverse.each do |comment| %>
+              <p class="comment">
+
+              <% if current_user == comment.commenter %>
+                <a href="/comments/<%= comment.id %>/delete" class="delete">delete</a>
+              <% end %>
+
+              <%= comment.body %><br>
+              <!-- TODO: fix datetime display -->
+
+              <small class="posted-on">
+                <%= comment.time_since_creation %> hours ago by <a href="/users/<%=comment.commenter.id %>"><%=comment.commenter.username%></a>
+              </small>
+
+              </p>
+            <% end %>
           </div>
-          <div class = 'inline answer-bodies'>
-            <p> -<%= answer.body %> </p>
-            <small class='answer-data'><p> <%= answer.time_since_creation %> hours ago</p>
-            <p> <%= answer.author.username %> |</p></small>
-          </div>
-            <% if current_user == answer.author %>
-              <form action ="/answers/<%= answer.id %>" method='post' id='delete-button' class='inline'>
-                <input type='hidden' name='_method' value='delete'>
-                <input type='submit' value ='delete'>
+          <% if logged_in? %>
+            <a class="open-comment-form" href="/questions/<%= @question.id %>/answers/<%= answer.id %>/comments/new">Comment</a>
+            <% if @new_comment_on_answer == answer.id %>
+              <form method="POST" action="/questions/<%= @question.id %>/answers/<%= @answer.id %>/comments">
+                <input type="text" name="body" placeholder="Comment here...">
+                <input type="submit" value="Save">
               </form>
             <% end %>
-        </li>
-      <% end %>
-    </ul>
+          <% end %>
+        </div>
 
+      <!-- END display comments for each answer -->
+
+    <% end %>
+  </ul>
+
+  <!-- If logged in user is question author, they can delete the question -->
   <% if logged_in? && current_user == @question.author %>
-    <form>
+    <form action="/questions/<%= @question.id %>/" method="POST">
+      <input type="hidden" name="_method" value="DELETE">
       <input type="submit" value="Delete Question">
     </form>
   <% elsif logged_in? && current_user != @question.author %>

@@ -8,10 +8,24 @@
 <nav>
   <ul>
     <% @questions.each do |question| %>
+
       <li class='question-preview'>
-        <p class='inline'><%= question.vote_value %></p>
+        <% if question.vote_value > 0 %>
+          <p class="inline positive-vote-count">
+            <%= question.vote_value %>
+          </p>
+        <% elsif question.vote_value < 0 %>
+          <p class="inline negative-vote-count">
+            <%= question.vote_value %>
+          </p>
+        <% else %>
+          <p class="inline">
+            <%= question.vote_value %>
+          </p>
+        <% end %>
+
       <a href="/questions/<%= question.id %>"><%= question.title %></a>--
-      Author: <a href=''><%= question.author.username %></a>
+      Author: <a href='/users/<%= question.author.id %>'><%= question.author.username %></a>
       </li>
     <% end %>
   </ul>
